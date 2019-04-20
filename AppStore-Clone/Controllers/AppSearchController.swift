@@ -11,6 +11,8 @@ import UIKit
 private let cellId = "Cell"
 
 class AppSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var appResults = [SearchResultApp]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,19 @@ class AppSearchController: UICollectionViewController, UICollectionViewDelegateF
         collectionView.backgroundColor = .white
         
         collectionView.register(SearchResultAppCell.self, forCellWithReuseIdentifier: cellId)
+        
+        fetchItuneApps()
+    }
+    
+    
+    fileprivate func fetchItuneApps() {
+        APIService.shared.fetchItuneApps { (results, error) in
+            if let err = error {
+                print("Error : \(err.localizedDescription)")
+                return
+            }
+            print(results.count)
+        }
         
     }
     
@@ -33,14 +48,21 @@ class AppSearchController: UICollectionViewController, UICollectionViewDelegateF
     
     // UICollectionView functions
     
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return appResults.count
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultAppCell
+        let res = appResults[indexPath.item]
+        cell.appNameLabel.text = res.trackName
+        cell.appCategoryLabel.text = res.primaryGenreName
+         cell.ratingsLabel.text = "Rating : \(res.averageUserRating ?? 0)"
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 350)

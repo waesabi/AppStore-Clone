@@ -71,7 +71,7 @@ class SearchResultAppCell: UICollectionViewCell {
                 appCategoryLabel,
                 ratingsLabel
             ]
-            , spacing: 3)
+            , spacing: 1)
         
         
         let infoStackView = UIStackView(arrangedSubviews: [
