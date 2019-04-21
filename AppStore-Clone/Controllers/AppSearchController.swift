@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let cellId = "Cell"
 
@@ -31,7 +32,10 @@ class AppSearchController: UICollectionViewController, UICollectionViewDelegateF
                 print("Error : \(err.localizedDescription)")
                 return
             }
-            print(results.count)
+            self.appResults = results
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
         
     }
@@ -56,9 +60,7 @@ class AppSearchController: UICollectionViewController, UICollectionViewDelegateF
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SearchResultAppCell
         let res = appResults[indexPath.item]
-        cell.appNameLabel.text = res.trackName
-        cell.appCategoryLabel.text = res.primaryGenreName
-         cell.ratingsLabel.text = "Rating : \(res.averageUserRating ?? 0)"
+        cell.resultApp = res
         return cell
     }
     

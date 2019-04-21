@@ -10,12 +10,37 @@ import UIKit
 
 class SearchResultAppCell: UICollectionViewCell {
     
+    
+    var resultApp : SearchResultApp! {
+        didSet {
+            appNameLabel.text = resultApp.trackName
+            appCategoryLabel.text = resultApp.primaryGenreName
+            ratingsLabel.text = "Rating : \(resultApp.averageUserRating ?? 0)"
+            let url = URL(string: resultApp.artworkUrl100)
+            appIconImageView.sd_setImage(with: url)
+            
+            let screenshotCount = resultApp.screenshotUrls.count
+            let screenshotUrls = resultApp.screenshotUrls
+            
+            screenshotImageView_1.sd_setImage(with: URL(string: screenshotUrls[0]))
+            
+            if screenshotCount > 1 {
+                screenshotImageView_2.sd_setImage(with: URL(string: screenshotUrls[1]))
+            }
+            
+            if screenshotCount > 2 {
+                screenshotImageView_3.sd_setImage(with: URL(string: screenshotUrls[2]))
+            }
+        }
+    }
+    
     let appIconImageView : UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = .red
         iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.layer.cornerRadius = 8
+        iv.layer.cornerRadius = 16
+        iv.clipsToBounds = true
         return iv
     }()
     
@@ -28,6 +53,7 @@ class SearchResultAppCell: UICollectionViewCell {
     let appCategoryLabel : UILabel = {
         let label = UILabel()
         label.text = "Social Media"
+//        label.textColor = .darkGray
         return label
     }()
     
@@ -40,7 +66,7 @@ class SearchResultAppCell: UICollectionViewCell {
     
     let getButton : UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .lightGray
+        button.backgroundColor = UIColor(white: 0.95, alpha: 1)
         button.setTitle("GET", for: .normal)
         button.layer.cornerRadius = 15
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
@@ -58,6 +84,8 @@ class SearchResultAppCell: UICollectionViewCell {
         imageView.backgroundColor = .blue
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        // imageView.layer.borderWidth = 0.5
+        // imageView.layer.borderColor = UIColor(white: 0.5, alpha: 0.3).cgColor
         return imageView
     }
     
