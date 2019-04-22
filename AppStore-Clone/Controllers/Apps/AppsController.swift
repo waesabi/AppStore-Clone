@@ -16,7 +16,7 @@ class AppsController: BaseCollectionViewController , UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .white
         
         collectionView.register(AppGroupCell.self, forCellWithReuseIdentifier: cellId)
         
@@ -37,10 +37,5 @@ class AppsController: BaseCollectionViewController , UICollectionViewDelegateFlo
         let width = view.frame.width
         return CGSize(width: width, height: 300)
     }
-    
-    
-    
-    
-    
     
 }
