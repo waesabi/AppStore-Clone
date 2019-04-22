@@ -16,7 +16,7 @@ class AppsController: BaseCollectionViewController , UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .init(white: 0.95, alpha: 1)
         
         collectionView.register(AppGroupCell.self, forCellWithReuseIdentifier: cellId)
         
@@ -36,6 +36,11 @@ class AppsController: BaseCollectionViewController , UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.frame.width
         return CGSize(width: width, height: 300)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .init(top: 16, left: 0, bottom: 0, right: 0)
     }
     
 }
