@@ -11,13 +11,13 @@ import SDWebImage
 
 private let cellId = "Cell"
 
-class AppSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class AppSearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var timer : Timer? // for Throtling
     
     let infoLabel : UILabel = {
         let label = UILabel()
-        label.text = "Please enter the search term..."
+        label.text = "Please enter the search term"
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
@@ -38,7 +38,7 @@ class AppSearchController: UICollectionViewController, UICollectionViewDelegateF
         
         collectionView.register(SearchResultAppCell.self, forCellWithReuseIdentifier: cellId)
         
-        // fetchItuneApps(searchText: "Instagram")
+        fetchItuneApps(searchText: "Instagram")
         setupSearchBar()
     }
     
@@ -65,16 +65,6 @@ class AppSearchController: UICollectionViewController, UICollectionViewDelegateF
             }
         }
         
-    }
-    
-    // Initialization of Collection View
-    
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // UICollectionView functions
