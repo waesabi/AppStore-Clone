@@ -14,9 +14,12 @@ class APIService {
     
     
     //MARK: Fetch Searched Apps
-    func fetchItuneApps(completion : @escaping ([SearchResultApp],Error?)->()) {
-        let urlString = "https://itunes.apple.com/search?term=instagram&entity=software"
+    func fetchItuneApps(searchText : String, completion : @escaping ([SearchResultApp],Error?)->()) {
+        let urlString = "https://itunes.apple.com/search?term=\(searchText)&entity=software"
+        
         guard let url = URL(string: urlString) else { return }
+        
+        print("URL : \(url)")
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let err = error {

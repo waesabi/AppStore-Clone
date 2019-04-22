@@ -36,7 +36,7 @@ class SearchResultAppCell: UICollectionViewCell {
     
     let appIconImageView : UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .red
+        iv.backgroundColor = UIColor(white: 0.95, alpha: 1)
         iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
         iv.layer.cornerRadius = 16
@@ -81,7 +81,7 @@ class SearchResultAppCell: UICollectionViewCell {
     fileprivate func createImageView() -> UIImageView {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = .blue
+        imageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         // imageView.layer.borderWidth = 0.5
