@@ -18,6 +18,7 @@ class AppRowCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        nameLabel.numberOfLines = 2
         appIconImageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         appIconImageView.constrainWidth(constant: 64)
         appIconImageView.constrainHeight(constant: 64)

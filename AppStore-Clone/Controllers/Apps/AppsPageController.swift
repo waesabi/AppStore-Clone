@@ -27,10 +27,52 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
         fetchData()
     }
     
+    var group = [AppGroup]()
     
     fileprivate func fetchData() {
         print("Fetching the data...")
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        APIService.shared.fetchGames { (appGroup, error) in
+            dispatchGroup.leave()
+            if let err = error {
+                print("Failed to fetch games : ", err.localizedDescription)
+                return
+            }
+            if let appGroup = appGroup {
+                self.group.append(appGroup)
+            }
+        }
+        dispatchGroup.enter()
+        APIService.shared.fetchTopGrossing { (appGroup, error) in
+            dispatchGroup.leave()
+            if let err = error {
+                print("Failed to fetch games : ", err.localizedDescription)
+                return
+            }
+            if let appGroup = appGroup {
+                self.group.append(appGroup)
+            }
+        }
+        
+        dispatchGroup.enter()
+        APIService.shared.fetchTopFree { (appGroup, error) in
+            dispatchGroup.leave()
+            if let err = error {
+                print("Failed to fetch games : ", err.localizedDescription)
+                return
+            }
+            if let appGroup = appGroup {
+                self.group.append(appGroup)
+            }
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.collectionView.reloadData()
+        }
     }
+    
     
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -46,12 +88,15 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return group.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppGroupCell
+        let appGroup = self.group[indexPath.item]
+        cell.titleLabel.text = appGroup.feed.title
+        cell.horizontalController.appGroup = appGroup
+        // cell.horizontalController.collectionView.reloadData()
         return cell
     }
     
