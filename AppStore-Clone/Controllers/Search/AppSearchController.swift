@@ -59,7 +59,7 @@ class AppSearchController: BaseCollectionViewController, UICollectionViewDelegat
                 print("Error : \(err.localizedDescription)")
                 return
             }
-            self.appResults = results
+            self.appResults = results?.results ?? []
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
