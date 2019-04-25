@@ -7,8 +7,22 @@
 //
 
 import UIKit
+import SDWebImage
 
 class AppsHeaderCell: UICollectionViewCell {
+    
+    var socialApp : SocialApp? {
+        didSet {
+            companyLabel.text = socialApp?.name ?? ""
+            descriptionLabel.text = socialApp?.tagline ?? ""
+            if let urlString = socialApp?.imageUrl {
+                let url = URL(string: urlString)
+                iconImageView.sd_setImage(with: url)
+            }
+            
+        }
+    }
+    
     
     let companyLabel = UILabel(text: "Facebook", font: .systemFont(ofSize: 16))
     let descriptionLabel = UILabel(text: "Keeping with friends is faster than ever", font: .systemFont(ofSize: 24))
@@ -18,7 +32,7 @@ class AppsHeaderCell: UICollectionViewCell {
         super.init(frame: frame)
          backgroundColor = .white
         
-        iconImageView.backgroundColor = .green
+        iconImageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         companyLabel.textColor = .blue
         
         let stackView = VerticalStackView(arrangeSubviews: [
@@ -35,6 +49,8 @@ class AppsHeaderCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
     
     

@@ -12,6 +12,12 @@ class AppsHeaderController: BaseCollectionViewController , UICollectionViewDeleg
     
     fileprivate let cellId = "cellId"
     
+    var socialApps : [SocialApp]? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,11 +31,15 @@ class AppsHeaderController: BaseCollectionViewController , UICollectionViewDeleg
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return socialApps?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AppsHeaderCell
+        if let socialApps = self.socialApps {
+            let app = socialApps[indexPath.item]
+            cell.socialApp = app
+        }
         return cell
     }
     

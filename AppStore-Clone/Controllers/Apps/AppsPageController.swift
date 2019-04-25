@@ -14,6 +14,14 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
     fileprivate let cellId = "cellId"
     fileprivate let headerId = "headerId"
     
+    let activityIndicatorView : UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.color = .black
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,10 +32,15 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
         // Register header view
         collectionView.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
+        // Add Indicator View
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
+        
         fetchData()
     }
     
     var group = [AppGroup]()
+    var socialApps = [SocialApp]()
     
     fileprivate func fetchData() {
         print("Fetching the data...")
@@ -49,7 +62,7 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
         APIService.shared.fetchTopGrossing { (appGroup, error) in
             dispatchGroup.leave()
             if let err = error {
-                print("Failed to fetch games : ", err.localizedDescription)
+                print("Failed to top grossing : ", err.localizedDescription)
                 return
             }
             if let appGroup = appGroup {
@@ -61,14 +74,27 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
         APIService.shared.fetchTopFree { (appGroup, error) in
             dispatchGroup.leave()
             if let err = error {
-                print("Failed to fetch games : ", err.localizedDescription)
+                print("Failed to top free : ", err.localizedDescription)
                 return
             }
             if let appGroup = appGroup {
                 self.group.append(appGroup)
             }
         }
+        
+        dispatchGroup.enter()
+        APIService.shared.fetchSocialApps { (socialApps, error) in
+            dispatchGroup.leave()
+            if let err = error {
+                print("Failed to top free : ", err.localizedDescription)
+                return
+            }
+            self.socialApps = socialApps ?? []
+            socialApps?.forEach({print($0.name)})
+        }
+        
         dispatchGroup.notify(queue: .main) {
+            self.activityIndicatorView.stopAnimating()
             self.collectionView.reloadData()
         }
     }
@@ -77,8 +103,8 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath)
-        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! AppsPageHeader
+        header.appHeaderController.socialApps = socialApps
         return header
     }
     

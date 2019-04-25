@@ -63,7 +63,7 @@ class APIService {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                print("Failed to fetch game.", error.localizedDescription)
+                print("Failed to App Groups.", error.localizedDescription)
                 completion(nil,error)
                 return
             }
@@ -76,8 +76,33 @@ class APIService {
                 print("Failed to decode Json: \(err)")
                 completion(nil,err)
             }
-            }
-            .resume()
+            
+            }.resume()
     }
+    
+    
+    func fetchSocialApps(completion : @escaping ([SocialApp]?,Error?)->()) {
+        let jsonUrl = "https://api.letsbuildthatapp.com/appstore/social"
+        guard let url = URL(string: jsonUrl) else { return  }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Failed to fetch Social Apps.", error.localizedDescription)
+                completion(nil,error)
+                return
+            }
+            guard let data = data else { return }
+            do {
+                let jsonData = try JSONDecoder().decode([SocialApp].self, from: data)
+                completion(jsonData,nil)
+            }
+            catch let err {
+                print("Failed to decode Json: \(err)")
+                completion(nil,err)
+            }
+        }.resume()
+    }
+    
+    
+    
     
 }

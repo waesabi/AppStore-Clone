@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F04C5802270A9BE00C4FF23 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04C57F2270A9BE00C4FF23 /* AppGroup.swift */; };
+		2F04C5822270DE5800C4FF23 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F04C5812270DE5800C4FF23 /* SocialApp.swift */; };
 		2F72A6512269E0BA00BDF592 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F72A6502269E0BA00BDF592 /* AppDelegate.swift */; };
 		2F72A6532269E0BA00BDF592 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F72A6522269E0BA00BDF592 /* ViewController.swift */; };
 		2F72A6562269E0BA00BDF592 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F72A6542269E0BA00BDF592 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		2F04C57F2270A9BE00C4FF23 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
+		2F04C5812270DE5800C4FF23 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
 		2F72A64D2269E0BA00BDF592 /* AppStore-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AppStore-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F72A6502269E0BA00BDF592 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F72A6522269E0BA00BDF592 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				2F72A673226B203C00BDF592 /* SearchResultApps.swift */,
 				2F04C57F2270A9BE00C4FF23 /* AppGroup.swift */,
+				2F04C5812270DE5800C4FF23 /* SocialApp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				2F7F847C226F84550023D6BE /* AppsPageHeader.swift in Sources */,
 				2F72A679226B294600BDF592 /* APIService.swift in Sources */,
 				2F7F847A226E2A9F0023D6BE /* Extensions.swift in Sources */,
+				2F04C5822270DE5800C4FF23 /* SocialApp.swift in Sources */,
 				2F72A671226B087100BDF592 /* VerticalStackView.swift in Sources */,
 				2F04C5802270A9BE00C4FF23 /* AppGroup.swift in Sources */,
 				2F7F8480226F88BC0023D6BE /* AppsHeaderCell.swift in Sources */,
