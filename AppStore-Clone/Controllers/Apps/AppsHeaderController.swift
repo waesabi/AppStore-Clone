@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppsHeaderController: BaseCollectionViewController , UICollectionViewDelegateFlowLayout{
+class AppsHeaderController: HorizontalSnappingController , UICollectionViewDelegateFlowLayout{
     
     fileprivate let cellId = "cellId"
     
@@ -20,13 +20,9 @@ class AppsHeaderController: BaseCollectionViewController , UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .white
         collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellId)
-        
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        collectionView.contentInset = .init(top: 8, left: 16, bottom: 8, right: 16)
     }
     
     
@@ -44,12 +40,12 @@ class AppsHeaderController: BaseCollectionViewController , UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width - 42, height: view.frame.height)
+        return CGSize(width: view.frame.width - 48, height: view.frame.height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 8, left: 16, bottom: 8, right: 16)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return .init(top: 8, left: 16, bottom: 8, right: 16)
+//    }
     
     
     
