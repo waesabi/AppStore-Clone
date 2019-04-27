@@ -123,6 +123,12 @@ class AppsPageController: BaseCollectionViewController , UICollectionViewDelegat
         cell.titleLabel.text = appGroup.feed.title
         cell.horizontalController.appGroup = appGroup
         // cell.horizontalController.collectionView.reloadData()
+        cell.horizontalController.didSelectHandler =  { [weak self ] feedResult in
+            let appDetailController = AppsDetailController()
+            appDetailController.navigationItem.title = feedResult.name
+            appDetailController.appId = feedResult.id
+            self?.navigationController?.pushViewController(appDetailController, animated: true)
+        }
         return cell
     }
     

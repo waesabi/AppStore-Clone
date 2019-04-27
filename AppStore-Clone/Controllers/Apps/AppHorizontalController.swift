@@ -13,6 +13,8 @@ class AppHorizontalController: HorizontalSnappingController {
     
     fileprivate let cellId = "cellId"
     
+    var didSelectHandler : ((FeedResult) -> ())?
+    
     var appGroup : AppGroup? {
         didSet {
             self.collectionView.reloadData()
@@ -26,6 +28,16 @@ class AppHorizontalController: HorizontalSnappingController {
         
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
+        
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let app = appGroup?.feed.results[indexPath.item]
+        print(app?.name ?? "No name")
+        if let app = app {
+            didSelectHandler?(app)
+        }
         
     }
     
