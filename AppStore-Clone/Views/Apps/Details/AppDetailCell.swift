@@ -39,10 +39,9 @@ class AppDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .darkGray
         
         appIconImageView.backgroundColor = .red
-        appIconImageView.constrainWidth(constant: 120)
+        appIconImageView.constrainWidth(constant: 100)
         appIconImageView.constrainHeight(constant: 120)
         
         artistLabel.textColor = .lightGray
@@ -57,7 +56,7 @@ class AppDetailCell: UICollectionViewCell {
             appNameLabel,
             artistLabel,
             UIStackView(arrangedSubviews: [priceLabelButotn,UIView()])
-            ], spacing: 0)
+            ], spacing: 2)
         
         
         let horizontalStackView = UIStackView(arrangedSubviews: [
