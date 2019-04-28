@@ -14,14 +14,15 @@ struct SearchResultApps : Decodable {
 }
 
 struct SearchResultApp : Decodable {
+    let trackId : Int
     let trackName : String
     let primaryGenreName : String
     let averageUserRating : Float?
     let artworkUrl100 : String // App Icon
     let screenshotUrls : [String] // Screenshot
     
-    let formattedPrice : String
-    let releaseNotes : String
+    var formattedPrice : String?
+    var releaseNotes : String?
     let description : String
     let artistName : String
 }

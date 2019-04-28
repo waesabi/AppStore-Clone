@@ -39,8 +39,7 @@ class AppDetailCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
-        appIconImageView.backgroundColor = .red
+        appIconImageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         appIconImageView.constrainWidth(constant: 100)
         appIconImageView.constrainHeight(constant: 120)
         
