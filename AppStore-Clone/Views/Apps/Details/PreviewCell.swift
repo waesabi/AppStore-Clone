@@ -15,7 +15,7 @@ class PreviewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = UIColor(white: 0.95, alpha: 1)
+        // backgroundColor = UIColor(white: 0.95, alpha: 1)
         addSubview(previewLabel)
         previewLabel.anchor(top: self.topAnchor, leading: self.leadingAnchor, bottom: nil, trailing: self.trailingAnchor, padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         

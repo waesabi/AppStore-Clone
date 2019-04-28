@@ -36,6 +36,10 @@
 		2FCBD8B0227570010003BEC7 /* PreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8AF227570010003BEC7 /* PreviewCell.swift */; };
 		2FCBD8B2227571250003BEC7 /* PreviewScreenshotController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8B1227571250003BEC7 /* PreviewScreenshotController.swift */; };
 		2FCBD8B42275721D0003BEC7 /* ScreenshotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8B32275721D0003BEC7 /* ScreenshotCell.swift */; };
+		2FCBD8B6227585E20003BEC7 /* ReviewRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8B5227585E20003BEC7 /* ReviewRowCell.swift */; };
+		2FCBD8B82275885A0003BEC7 /* ReviewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8B72275885A0003BEC7 /* ReviewsController.swift */; };
+		2FCBD8BA22758B070003BEC7 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8B922758B070003BEC7 /* ReviewCell.swift */; };
+		2FCBD8BC2275920F0003BEC7 /* AppReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCBD8BB2275920F0003BEC7 /* AppReview.swift */; };
 		2FFF99042272A24900046A17 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF99032272A24900046A17 /* HorizontalSnappingController.swift */; };
 		2FFF99062272AD3000046A17 /* BetterSnappingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF99052272AD3000046A17 /* BetterSnappingLayout.swift */; };
 		ED6CF4370C0C57D8132F7E33 /* Pods_AppStore_Clone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E51086F3A2B29581CCBB7DDF /* Pods_AppStore_Clone.framework */; };
@@ -73,6 +77,10 @@
 		2FCBD8AF227570010003BEC7 /* PreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCell.swift; sourceTree = "<group>"; };
 		2FCBD8B1227571250003BEC7 /* PreviewScreenshotController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewScreenshotController.swift; sourceTree = "<group>"; };
 		2FCBD8B32275721D0003BEC7 /* ScreenshotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotCell.swift; sourceTree = "<group>"; };
+		2FCBD8B5227585E20003BEC7 /* ReviewRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRowCell.swift; sourceTree = "<group>"; };
+		2FCBD8B72275885A0003BEC7 /* ReviewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsController.swift; sourceTree = "<group>"; };
+		2FCBD8B922758B070003BEC7 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
+		2FCBD8BB2275920F0003BEC7 /* AppReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReview.swift; sourceTree = "<group>"; };
 		2FFF99032272A24900046A17 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
 		2FFF99052272AD3000046A17 /* BetterSnappingLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterSnappingLayout.swift; sourceTree = "<group>"; };
 		BE17FA4A833DC88E2EF47FA6 /* Pods-AppStore-Clone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AppStore-Clone.release.xcconfig"; path = "Pods/Target Support Files/Pods-AppStore-Clone/Pods-AppStore-Clone.release.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +105,7 @@
 			children = (
 				2F1EDAF122743E14003695B3 /* AppsDetailController.swift */,
 				2FCBD8B1227571250003BEC7 /* PreviewScreenshotController.swift */,
+				2FCBD8B72275885A0003BEC7 /* ReviewsController.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -107,6 +116,8 @@
 				2F1EDAF422746D70003695B3 /* AppDetailCell.swift */,
 				2FCBD8AF227570010003BEC7 /* PreviewCell.swift */,
 				2FCBD8B32275721D0003BEC7 /* ScreenshotCell.swift */,
+				2FCBD8B5227585E20003BEC7 /* ReviewRowCell.swift */,
+				2FCBD8B922758B070003BEC7 /* ReviewCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -185,6 +196,7 @@
 				2F72A673226B203C00BDF592 /* SearchResultApps.swift */,
 				2F04C57F2270A9BE00C4FF23 /* AppGroup.swift */,
 				2F04C5812270DE5800C4FF23 /* SocialApp.swift */,
+				2FCBD8BB2275920F0003BEC7 /* AppReview.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -363,9 +375,11 @@
 				2F72A674226B203C00BDF592 /* SearchResultApps.swift in Sources */,
 				2F7F8470226E12D90023D6BE /* BaseCollectionViewController.swift in Sources */,
 				2F7F847E226F86250023D6BE /* AppsHeaderController.swift in Sources */,
+				2FCBD8B6227585E20003BEC7 /* ReviewRowCell.swift in Sources */,
 				2F72A66B2269F2CD00BDF592 /* AppSearchController.swift in Sources */,
 				2F72A66E2269F64500BDF592 /* SearchResultAppCell.swift in Sources */,
 				2F7F8474226E14840023D6BE /* AppsGroupCell.swift in Sources */,
+				2FCBD8B82275885A0003BEC7 /* ReviewsController.swift in Sources */,
 				2F1EDAF222743E14003695B3 /* AppsDetailController.swift in Sources */,
 				2F72A6592269E0BA00BDF592 /* AppStore_Clone.xcdatamodeld in Sources */,
 				2FFF99042272A24900046A17 /* HorizontalSnappingController.swift in Sources */,
@@ -378,12 +392,14 @@
 				2F7F847A226E2A9F0023D6BE /* Extensions.swift in Sources */,
 				2F04C5822270DE5800C4FF23 /* SocialApp.swift in Sources */,
 				2F72A671226B087100BDF592 /* VerticalStackView.swift in Sources */,
+				2FCBD8BA22758B070003BEC7 /* ReviewCell.swift in Sources */,
 				2F04C5802270A9BE00C4FF23 /* AppGroup.swift in Sources */,
 				2F1EDAF522746D71003695B3 /* AppDetailCell.swift in Sources */,
 				2F7F8480226F88BC0023D6BE /* AppsHeaderCell.swift in Sources */,
 				2FCBD8B0227570010003BEC7 /* PreviewCell.swift in Sources */,
 				2FCBD8B2227571250003BEC7 /* PreviewScreenshotController.swift in Sources */,
 				2F72A6532269E0BA00BDF592 /* ViewController.swift in Sources */,
+				2FCBD8BC2275920F0003BEC7 /* AppReview.swift in Sources */,
 				2F72A6512269E0BA00BDF592 /* AppDelegate.swift in Sources */,
 				2F7F8478226E29A10023D6BE /* AppRowCell.swift in Sources */,
 			);

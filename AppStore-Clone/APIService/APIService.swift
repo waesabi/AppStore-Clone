@@ -24,6 +24,11 @@ class APIService {
         fetchGenericJSONData(urlString: jsonUrl, completion: completion)
     }
     
+    func fetchAppReviews(appId : String, completion : @escaping (AppReview?,Error?)->()) {
+        let jsonUrl = "https://itunes.apple.com/rss/customerreviews/page=1/id=\(appId)/sortby=mostrecent/json?l=en&cc=us"
+        fetchGenericJSONData(urlString: jsonUrl, completion: completion)
+    }
+    
     // Top Grossing
     func fetchTopGrossing(completion : @escaping (AppGroup?, Error?)->()) {
         let urlString = "https://rss.itunes.apple.com/api/v1/us/ios-apps/top-grossing/all/25/explicit.json"

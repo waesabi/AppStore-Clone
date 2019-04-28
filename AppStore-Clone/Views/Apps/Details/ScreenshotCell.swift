@@ -26,7 +26,7 @@ class ScreenshotCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        previewImageView.backgroundColor = .red
+        previewImageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         addSubview(previewImageView)
         previewImageView.fillSuperview(padding: .init(top: 16, left: 0, bottom: 16, right: 0))
         
