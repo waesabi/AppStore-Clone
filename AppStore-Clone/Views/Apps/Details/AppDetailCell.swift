@@ -40,7 +40,7 @@ class AppDetailCell: UICollectionViewCell {
         super.init(frame: frame)
         
         appIconImageView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        appIconImageView.constrainWidth(constant: 100)
+        appIconImageView.constrainWidth(constant: 120)
         appIconImageView.constrainHeight(constant: 120)
         
         artistLabel.textColor = .lightGray
