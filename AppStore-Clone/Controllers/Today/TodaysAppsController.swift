@@ -13,19 +13,69 @@ class TodaysAppsController: BaseCollectionViewController, UICollectionViewDelega
     let cellId = "cellId"
     let multipleAppCellId = "multipleCellId"
     
-    let items : [TodayItem] = [
-        TodayItem(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to inteligently organize your life the right way.", backgroundColor: .white, cellType: .single),
-        TodayItem(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything!", backgroundColor: #colorLiteral(red: 0.9841833711, green: 0.9656425118, blue: 0.7242308259, alpha: 1), cellType: .single),
-        TodayItem(category: "THE DAILY LIST", title: "Test-Drive These Cool Apps", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple)
-    ]
+//    let items : [TodayItem] = [
+//        TodayItem(category: "THE DAILY LIST", title: "Test-Drive These Cool Apps", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple),
+//        TodayItem(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to inteligently organize your life the right way.", backgroundColor: .white, cellType: .single),
+//        TodayItem(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything!", backgroundColor: #colorLiteral(red: 0.9841833711, green: 0.9656425118, blue: 0.7242308259, alpha: 1), cellType: .single)
+//    ]
+    
+    var items = [TodayItem]()
+    let activityIndicatorView : UIActivityIndicatorView = {
+        let loadingView = UIActivityIndicatorView(style: .whiteLarge)
+        loadingView.startAnimating()
+        loadingView.color = .darkGray
+        loadingView.hidesWhenStopped = true
+        return loadingView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         collectionView.register(TodaysCell.self, forCellWithReuseIdentifier: CellType.single.rawValue)
         collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: CellType.multiple.rawValue)
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.centerInSuperview()
+        fetchApps()
+    }
+    
+    var topGrossingAppGroup : AppGroup?
+    var gamesGroup : AppGroup?
+    // Dispatch Group
+    fileprivate func fetchApps() {
+        let dispatchGroup = DispatchGroup()
         
+        dispatchGroup.enter()
+        APIService.shared.fetchTopGrossing { (appGroup, error) in
+            dispatchGroup.leave()
+            if let err = error {
+                print("Failed to fetch top grossing app : \(err.localizedDescription)")
+                return
+            }
+            self.topGrossingAppGroup = appGroup
+        }
         
+        dispatchGroup.enter()
+        APIService.shared.fetchGames { (appGroup, error) in
+            dispatchGroup.leave()
+            if let err = error {
+                print("Failed to fetch top grossing app : \(err.localizedDescription)")
+                return
+            }
+            self.gamesGroup = appGroup
+        }
+        
+        // Completion of dispatch group
+        dispatchGroup.notify(queue: .main) {
+            self.activityIndicatorView.stopAnimating()
+            
+            self.items = [
+                TodayItem(category: "DAILY APPS LIST", title: self.topGrossingAppGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: self.topGrossingAppGroup?.feed.results ?? []),
+                TodayItem(category: "DAILY GAMES LIST", title: self.gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: self.gamesGroup?.feed.results ?? []),
+                TodayItem(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything!", backgroundColor: #colorLiteral(red: 0.9841833711, green: 0.9656425118, blue: 0.7242308259, alpha: 1), cellType: .single, apps: [])
+                
+            ]
+            self.collectionView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

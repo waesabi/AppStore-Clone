@@ -14,6 +14,8 @@ class TodayMultipleAppCell: BaseTodayCell {
         didSet  {
             categoryLabel.text = todayItem?.category
             titleLabel.text = todayItem?.title
+            multipleAppsController.feedResult = todayItem.apps
+            multipleAppsController.collectionView.reloadData()
         }
     }
     
@@ -21,7 +23,8 @@ class TodayMultipleAppCell: BaseTodayCell {
     let categoryLabel = UILabel(text: "LIFE HACK", font: .boldSystemFont(ofSize: 12))
     let titleLabel = UILabel(text: "Utilizing Your Time", font: .boldSystemFont(ofSize: 32), numberOfLines: 0)
     
-    let multipleAppsController = UIViewController()
+    
+    let multipleAppsController = TodayMultipleAppsController()
     
     
     
@@ -34,7 +37,6 @@ class TodayMultipleAppCell: BaseTodayCell {
         
         categoryLabel.constrainHeight(constant: 24)
         
-        multipleAppsController.view.backgroundColor = .red
         let stackView = VerticalStackView(arrangeSubviews: [
             categoryLabel,
             titleLabel,
