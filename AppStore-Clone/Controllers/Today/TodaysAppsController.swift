@@ -81,6 +81,7 @@ class TodaysAppsController: BaseCollectionViewController, UICollectionViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.superview?.setNeedsLayout()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -94,8 +95,26 @@ class TodaysAppsController: BaseCollectionViewController, UICollectionViewDelega
         let cellType = item.cellType.rawValue
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellType, for: indexPath) as! BaseTodayCell
         cell.todayItem = item
+        
+        (cell as? TodayMultipleAppCell)?.multipleAppsController.collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMultipleAppsTap)))
         return cell
-
+    }
+    
+    @objc fileprivate func handleMultipleAppsTap(gesture : UITapGestureRecognizer) {
+        let collectionView = gesture.view
+        
+        var superView = collectionView?.superview
+        while superView != nil {
+            if let cell = superView as? TodayMultipleAppCell {
+                guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+                let apps = self.items[indexPath.item].apps
+                let controller = TodayMultipleAppsController(mode: .fullScreen)
+                controller.feedResult = apps
+                present(controller, animated: true)
+                return 
+            }
+            superView = superView?.superview
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -119,6 +138,15 @@ class TodaysAppsController: BaseCollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item selected....")
+        
+        
+        if self.items[indexPath.item].cellType == .multiple {
+            let redVC = TodayMultipleAppsController(mode: .fullScreen)
+            redVC.feedResult = self.items[indexPath.item].apps
+            present(BackEnabledNavigationController(rootViewController: redVC), animated: true, completion: nil)
+            return
+        }
+        
         let todaysAppDetailController = TodaysAppDetailController()
         todaysAppDetailController.todayItem = self.items[indexPath.row]
         todaysAppDetailController.dismissHandler = {

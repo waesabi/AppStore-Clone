@@ -24,7 +24,7 @@ class TodayMultipleAppCell: BaseTodayCell {
     let titleLabel = UILabel(text: "Utilizing Your Time", font: .boldSystemFont(ofSize: 32), numberOfLines: 0)
     
     
-    let multipleAppsController = TodayMultipleAppsController()
+    let multipleAppsController = TodayMultipleAppsController(mode: .small)
     
     
     
